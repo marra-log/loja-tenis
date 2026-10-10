@@ -1,0 +1,161 @@
+import type { Order, Product } from "./types";
+
+export const banners = [
+  {
+    id: "hero",
+    title: "Tênis de prateleira, grade completa.",
+    subtitle: "Cem modelos. Foto, preço e numeração no centro.",
+    image: "/banners/hero.jpg",
+    href: "/catalogo",
+  },
+  {
+    id: "desconto",
+    title: "5% no Pix",
+    subtitle: "O preço menor já aparece na ficha.",
+    image: "/banners/desconto.jpg",
+    href: "/descontos",
+  },
+  {
+    id: "editorial",
+    title: "Branco, preto e bege",
+    subtitle: "Primeira linha para o dia a dia.",
+    image: "/banners/editorial.jpg",
+    href: "/catalogo",
+  },
+];
+
+export const products: Product[] = [
+  {
+    sku: "NK-AF1-WHT-01",
+    name: "Air Force 1 '07 Branco",
+    brand: "Nike",
+    category: "casual",
+    gender: "unissex",
+    price: 799.9,
+    pixPrice: 759.9,
+    description: "Couro liso, solado cupsole e caimento clássico. Numeração brasileira.",
+    featured: true,
+    active: true,
+    cover: "/produtos/branco.jpg",
+    variants: [
+      { size: "36", stock: 1 },
+      { size: "37", stock: 2 },
+      { size: "38", stock: 4 },
+      { size: "39", stock: 4 },
+      { size: "40", stock: 3 },
+      { size: "41", stock: 2 },
+      { size: "42", stock: 1 },
+    ],
+  },
+  {
+    sku: "NK-DNK-BLK-02",
+    name: "Dunk Low Black White",
+    brand: "Nike",
+    category: "casual",
+    gender: "unissex",
+    price: 899.9,
+    pixPrice: 849.9,
+    description: "Couro premium, palmilha macia e solado de borracha. Edição de prateleira.",
+    featured: true,
+    active: true,
+    cover: "/produtos/preto.jpg",
+    variants: [
+      { size: "38", stock: 2 },
+      { size: "39", stock: 3 },
+      { size: "40", stock: 0 },
+      { size: "41", stock: 2 },
+      { size: "42", stock: 1 },
+    ],
+  },
+  {
+    sku: "AD-SAM-WHT-03",
+    name: "Samba OG Branco",
+    brand: "Adidas",
+    category: "casual",
+    gender: "unissex",
+    price: 699.9,
+    pixPrice: 659.9,
+    description: "Couro e suede, solado de borracha gum. Silhueta baixa de uso diário.",
+    featured: true,
+    active: true,
+    cover: "/produtos/branco.jpg",
+    variants: [
+      { size: "37", stock: 1 },
+      { size: "38", stock: 3 },
+      { size: "39", stock: 2 },
+      { size: "40", stock: 2 },
+      { size: "41", stock: 1 },
+    ],
+  },
+  {
+    sku: "NB-550-GRY-04",
+    name: "550 Cinza",
+    brand: "New Balance",
+    category: "casual",
+    gender: "masculino",
+    price: 849.9,
+    pixPrice: 799.9,
+    description: "Cabedal em couro e mesh, entressola macia. Visual de basquete dos anos 80.",
+    featured: false,
+    active: true,
+    cover: "/produtos/bege.jpg",
+    variants: [
+      { size: "39", stock: 2 },
+      { size: "40", stock: 2 },
+      { size: "41", stock: 3 },
+      { size: "42", stock: 1 },
+      { size: "43", stock: 1 },
+    ],
+  },
+  {
+    sku: "NK-PEG-RUN-05",
+    name: "Pegasus 41",
+    brand: "Nike",
+    category: "corrida",
+    gender: "masculino",
+    price: 749.9,
+    pixPrice: 709.9,
+    description: "Amortecimento diário para treino. Cabedal respirável e solado de alta tração.",
+    featured: false,
+    active: true,
+    cover: "/produtos/preto.jpg",
+    variants: [
+      { size: "40", stock: 2 },
+      { size: "41", stock: 4 },
+      { size: "42", stock: 3 },
+      { size: "43", stock: 1 },
+    ],
+  },
+  {
+    sku: "AD-ULT-RED-06",
+    name: "Ultraboost Light",
+    brand: "Adidas",
+    category: "corrida",
+    gender: "feminino",
+    price: 999.9,
+    pixPrice: 949.9,
+    description: "Entressola leve, retorno de energia e cabedal em malha. Treino e rua.",
+    featured: true,
+    active: true,
+    cover: "/produtos/bege.jpg",
+    variants: [
+      { size: "35", stock: 1 },
+      { size: "36", stock: 2 },
+      { size: "37", stock: 2 },
+      { size: "38", stock: 1 },
+    ],
+  },
+];
+
+export const orders: Order[] = [
+  { number: 1042, status: "pago", customer: "Marina Alves", email: "marina@email.com", items: 1, total: 759.9, payment: "Pix", createdAt: "09/10 18:12" },
+  { number: 1041, status: "enviado", customer: "Lucas Ferreira", email: "lucas@email.com", items: 2, total: 1509.8, payment: "Cartão", createdAt: "09/10 11:40" },
+  { number: 1040, status: "aguardando", customer: "Ana Ribeiro", email: "ana@email.com", items: 1, total: 849.9, payment: "Pix", createdAt: "08/10 21:05" },
+  { number: 1039, status: "entregue", customer: "Pedro Souza", email: "pedro@email.com", items: 1, total: 659.9, payment: "Cartão", createdAt: "07/10 16:22" },
+];
+
+export const lowStock = products.flatMap((p) =>
+  p.variants
+    .filter((v) => v.stock > 0 && v.stock <= 1)
+    .map((v) => ({ sku: p.sku, name: p.name, size: v.size, stock: v.stock }))
+);
