@@ -1,9 +1,10 @@
-import { orders, products, lowStock } from "@/lib/data";
+import { orders, products } from "@/lib/data";
 import { brl } from "@/lib/types";
 
 export default function AdminHome() {
   const paid = orders.filter((o) => o.status === "pago" || o.status === "enviado" || o.status === "entregue");
   const total = paid.reduce((s, o) => s + o.total, 0);
+  const low = products.flatMap((p) => p.variants.filter((v) => v.stock > 0 && v.stock <= 1));
   return (
     <>
       <h1>Resumo</h1>
@@ -11,7 +12,7 @@ export default function AdminHome() {
         <div className="stat"><span>Pedidos do dia</span><strong>2</strong></div>
         <div className="stat"><span>Pagos</span><strong>{paid.length}</strong></div>
         <div className="stat"><span>Faturado</span><strong>{brl(total)}</strong></div>
-        <div className="stat"><span>Estoque baixo</span><strong>{lowStock.length}</strong></div>
+        <div className="stat"><span>Estoque baixo</span><strong>{low.length}</strong></div>
       </div>
       <div className="panel" style={{ padding: 8 }}>
         <table>

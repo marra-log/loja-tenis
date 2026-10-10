@@ -1,23 +1,18 @@
+"use client";
+
 import { StoreShell } from "@/components/StoreShell";
 import { ProductCard } from "@/components/ProductCard";
-import { products } from "@/lib/data";
+import { useCatalog } from "@/components/Providers";
 
 export default function CatalogPage() {
+  const { products } = useCatalog();
+  const list = products.filter((p) => p.active);
   return (
     <StoreShell>
       <section className="section">
         <div className="wrap">
-          <h2>Catálogo</h2>
-          <div className="filters">
-            <span className="chip">Todas as marcas</span>
-            <span className="chip">Nike</span>
-            <span className="chip">Adidas</span>
-            <span className="chip">Tamanho</span>
-            <span className="chip">Até R$ 800</span>
-          </div>
-          <div className="grid">
-            {products.filter((p) => p.active).map((p) => <ProductCard key={p.sku} product={p} />)}
-          </div>
+          <h1>Catálogo</h1>
+          <div className="grid">{list.map((p) => <ProductCard key={p.sku} product={p} />)}</div>
         </div>
       </section>
     </StoreShell>
